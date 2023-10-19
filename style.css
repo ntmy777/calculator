@@ -3,8 +3,8 @@ html {
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
-    margin: 0; /* Remove default body margin */
-    background-color: #e7d8e0; /* Set a background color if desired */
+    margin: 0; 
+    background-color: #e7d8e0; 
 }
 
 .container{
