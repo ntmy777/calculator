@@ -1,9 +1,43 @@
-body {
+html {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh; 
     margin: 0; /* Remove default body margin */
-    background-color: #f0f0f0; /* Set a background color if desired */
+    background-color: #e7d8e0; /* Set a background color if desired */
 }
 
+.container{
+    background-color: rgb(89, 88, 88);
+    padding: 10px;
+    border-radius: 2%;
+}
+
+button, .display{
+    background-color: rgb(178, 175, 175);
+    margin : 5px;
+    padding: 10px 20px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+    font-size: 30px;
+    width: 70px;
+}
+
+.display{
+    margin : 6px;
+    opacity: 0.9;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    height: 100px;
+    width: auto;
+    border: 3px solid black;
+    text-align: right;
+}
+
+#clear, #del{
+    width: 155px;
+}
+
+h1{
+    background-color: transparent;
+    text-align: center;
+}

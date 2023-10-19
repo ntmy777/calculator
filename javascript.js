@@ -182,6 +182,9 @@ document.addEventListener('keydown', function (event) {
     }
 
     else if (key === "+" || key === "-" || key === "*" || key === "/" || key === "=") {
+        if(key ==="/"){
+            event.preventDefault();
+        }
         if (repeat === 0) {
             front = +userInput.join('');
             mid = key;
