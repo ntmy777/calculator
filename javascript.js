@@ -62,10 +62,6 @@ let operate = function (num1, op, num2) {
     }
 }
 
-function addInput(digit) {
-    userInput.push(digit.target.textContent);
-}
-
 buttons.forEach(function (button) {
     if (button.id === "clear") {
         button.addEventListener('click', function () {
@@ -99,7 +95,6 @@ buttons.forEach(function (button) {
                     userInput.pop();
                 }
             }
-            // display.value = userInput;
             if (mid) {
                 upDisplay.textContent = front + ' ' + mid;
                 lowDisplay.textContent = userInput.join('');
@@ -124,7 +119,7 @@ counts.forEach(function (count) {
 
         else if (repeat === 1) {
             back = +userInput.join('');
-            if (back === 0) {
+            if (mid === "/" && back === 0) {
                 alert('unable to divide by 0! Please reenter!!!');
             }
             else {
@@ -145,8 +140,8 @@ counts.forEach(function (count) {
                     if (front.toString().includes('.')) {
                         dotcount = 1;
                     }
-                    else{
-                        dotcount=0;
+                    else {
+                        dotcount = 0;
                     }
                 }
             }
@@ -154,17 +149,78 @@ counts.forEach(function (count) {
     })
 })
 
-// equal.addEventListener('click', function () {
-//     back = +userInput.join('');
-//     console.log(front, mid, back);
-//     upDisplay.textContent = front + ' ' + mid + ' ' + back + '=';
-//     front = operate(front, mid, back);
-//     lowDisplay.textContent = front;
-//     console.log(front);
-//     userInput = [];
-// })
+document.addEventListener('keydown', function (event) {
+    let key = event.key;
+    if (key === "Enter") {
+        key = "=";
+    }
 
+    if (key === "Backspace") {
+        if (userInput[userInput.length - 1] === ".") {
+            dotcount--;
+        }
+        userInput.pop();
+        lowDisplay.textContent = userInput.join('');
+    }
 
+    else if ((key >= '0' && key <= '9') || key === ".") {
+        userInput.push(key);
+        if (key === ".") {
+            dotcount++;
+            if (dotcount > 1) {
+                alert('unable to insert more than one "." !!!')
+                userInput.pop();
+            }
+        }
+        if (mid) {
+            upDisplay.textContent = front + ' ' + mid;
+            lowDisplay.textContent = userInput.join('');
+        }
+        else {
+            lowDisplay.textContent = userInput.join('');
+        }
+    }
 
+    else if (key === "+" || key === "-" || key === "*" || key === "/" || key === "=") {
+        if (repeat === 0) {
+            front = +userInput.join('');
+            mid = key;
+            lowDisplay.textContent = front + ' ' + mid;
+            userInput = [];
+            dotcount = 0;
+            repeat = 1;
+        }
 
+        else if (repeat === 1) {
+            back = +userInput.join('');
+            console.log(typeof key, key, typeof back, back);
+            if (mid === "/" && back === 0) {
+                alert('unable to divide by 0! Please reenter!!!');
+            }
+            else {
+                upDisplay.textContent = front + ' ' + mid + ' ' + back + ' =';
+                front = +operate(front, mid, back);
+                mid = key;
+                if (mid !== "=") {
+                    lowDisplay.textContent = front + ' ' + mid;
+                    userInput = [];
+                    dotcount = 0;
+                }
 
+                else {
+                    lowDisplay.textContent = front;
+                    userInput = [front];
+                    let out = front;
+                    repeat = 0;
+                    if (front.toString().includes('.')) {
+                        dotcount = 1;
+                    }
+                    else {
+                        dotcount = 0;
+                    }
+                }
+            }
+        }
+
+    }
+})
