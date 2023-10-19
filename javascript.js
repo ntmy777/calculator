@@ -81,7 +81,7 @@ buttons.forEach(function (button) {
     }
     else if (button.id === "del") {
         button.addEventListener('click', function () {
-            if (userInput[userInput - 1] === ".") {
+            if (userInput[userInput.length - 1] === ".") {
                 dotcount--;
             }
             userInput.pop();
