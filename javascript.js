@@ -108,7 +108,7 @@ counts.forEach(function (count) {
             front = +userInput.join('');
             mid = event.target.textContent;
             upDisplay.textContent = front + ' ' + mid;
-            
+
             if (mid === "=") {
                 lowDisplay.textContent = front;
                 repeat = 0;
@@ -120,35 +120,32 @@ counts.forEach(function (count) {
                     dotcount = 0;
                 }
             }
-            else{
+            else {
                 lowDisplay.textContent = '';
                 repeat = 1;
                 userInput = [];
                 dotcount = 0;
             }
-            
+
         }
 
         else if (repeat === 1) {
             // mid = event.target.textContent;
             back = +userInput.join('');
-            if (back === 0) {
-                if (mid === "/") {
-                    alert('unable to divide by 0! Please reenter!!!');
+            if (mid === "/" && back === 0) {
+                alert('unable to divide by 0! Please reenter!!!');
+            }
+            else if (mid === "=" && back === 0) {
+                upDisplay.textContent = front + " " + mid;
+                lowDisplay.textContent = front;
+                userInput = [front];
+                if (front.toString().includes('.')) {
+                    dotcount = 1;
                 }
-                else if (mid === "=") {
-                    upDisplay.textContent = front + " " + mid;
-                    lowDisplay.textContent = front;
-                    userInput = [front];
-                    if (front.toString().includes('.')) {
-                        dotcount = 1;
-                    }
-                    else {
-                        dotcount = 0;
-                    }
-                    repeat = 0;
-                
+                else {
+                    dotcount = 0;
                 }
+                repeat = 0;
             }
 
             else {
@@ -170,8 +167,8 @@ counts.forEach(function (count) {
                         dotcount = 0;
                     }
                     repeat = 0;
-                } 
-            }    
+                }
+            }
         }
     })
 })
@@ -223,35 +220,32 @@ document.addEventListener('keydown', function (event) {
                     dotcount = 0;
                 }
             }
-            else{
+            else {
                 lowDisplay.textContent = '';
                 repeat = 1;
                 userInput = [];
                 dotcount = 0;
             }
-            
+
         }
 
         else if (repeat === 1) {
             back = +userInput.join('');
-            console.log(typeof key, key, typeof back, back);
-            if (back === 0) {
-                if (mid === "/") {
-                    alert('unable to divide by 0! Please reenter!!!');
+            // console.log(typeof key, key, typeof back, back);
+            if (mid === "/" && back === 0) {
+                alert('unable to divide by 0! Please reenter!!!');
+            }
+            else if (mid === "=" && back === 0) {
+                upDisplay.textContent = front + " " + mid;
+                lowDisplay.textContent = front;
+                userInput = [front];
+                if (front.toString().includes('.')) {
+                    dotcount = 1;
                 }
-                else if (mid === "=") {
-                    upDisplay.textContent = front + " " + mid;
-                    lowDisplay.textContent = front;
-                    userInput = [front];
-                    // console.log(userInput);
-                    if (front.toString().includes('.')) {
-                        dotcount = 1;
-                    }
-                    else {
-                        dotcount = 0;
-                    }
-                    repeat = 0;
+                else {
+                    dotcount = 0;
                 }
+                repeat = 0;
             }
 
             else {
@@ -276,8 +270,8 @@ document.addEventListener('keydown', function (event) {
                         dotcount = 0;
                     }
                     repeat = 0;
-                } 
-            }    
+                }
+            }
         }
 
     }
