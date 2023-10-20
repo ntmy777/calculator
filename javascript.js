@@ -1,8 +1,4 @@
-const clear = document.querySelector('#clear');
-const dot = document.querySelector('#dot');
-const equal = document.querySelector('#equal');
 const buttons = document.querySelectorAll('button');
-const digits = document.querySelectorAll('.digits');
 const counts = document.querySelectorAll('.counts');
 const upDisplay = document.querySelector('.upDisplay');
 const lowDisplay = document.querySelector('.lowDisplay');
@@ -111,7 +107,11 @@ counts.forEach(function (count) {
         if (repeat === 0) {
             front = +userInput.join('');
             mid = event.target.textContent;
-            lowDisplay.textContent = front + ' ' + mid;
+            upDisplay.textContent = front + ' ' + mid;
+            lowDisplay.textContent = '';
+            if (mid === "=") {
+                lowDisplay.textContent = front;
+            }
             userInput = [];
             dotcount = 0;
             repeat = 1;
@@ -119,9 +119,24 @@ counts.forEach(function (count) {
 
         else if (repeat === 1) {
             back = +userInput.join('');
-            if (mid === "/" && back === 0) {
-                alert('unable to divide by 0! Please reenter!!!');
+            if (back === 0) {
+                if (mid === "/") {
+                    alert('unable to divide by 0! Please reenter!!!');
+                }
+                else if (mid === "=") {
+                    upDisplay.textContent = front + " " + mid;
+                    lowDisplay.textContent = front;
+                    userInput = [front];
+                    if (front.toString().includes('.')) {
+                        dotcount = 1;
+                    }
+                    else {
+                        dotcount = 0;
+                    }
+                    repeat = 0;
+                }
             }
+
             else {
                 upDisplay.textContent = front + ' ' + mid + ' ' + back + ' =';
                 front = +operate(front, mid, back);
@@ -131,30 +146,24 @@ counts.forEach(function (count) {
                     userInput = [];
                     dotcount = 0;
                 }
-
                 else {
                     lowDisplay.textContent = front;
                     userInput = [front];
-                    let out = front;
-                    repeat = 0;
                     if (front.toString().includes('.')) {
                         dotcount = 1;
                     }
                     else {
                         dotcount = 0;
                     }
-                }
-            }
+                    repeat = 0;
+                } 
+            }    
         }
     })
 })
 
 document.addEventListener('keydown', function (event) {
     let key = event.key;
-    if (key === "Enter") {
-        key = "=";
-    }
-
     if (key === "Backspace") {
         if (userInput[userInput.length - 1] === ".") {
             dotcount--;
@@ -182,47 +191,69 @@ document.addEventListener('keydown', function (event) {
     }
 
     else if (key === "+" || key === "-" || key === "*" || key === "/" || key === "=") {
-        if(key ==="/"){
+        if (key === "/" || key === "=") {
             event.preventDefault();
         }
         if (repeat === 0) {
             front = +userInput.join('');
             mid = key;
-            lowDisplay.textContent = front + ' ' + mid;
+            upDisplay.textContent = front + ' ' + mid;
+            lowDisplay.textContent = '';
+            if (mid === "=") {
+                lowDisplay.textContent = front;
+            }
             userInput = [];
             dotcount = 0;
             repeat = 1;
         }
 
         else if (repeat === 1) {
+            // mid = key;
             back = +userInput.join('');
             console.log(typeof key, key, typeof back, back);
-            if (mid === "/" && back === 0) {
-                alert('unable to divide by 0! Please reenter!!!');
-            }
-            else {
-                upDisplay.textContent = front + ' ' + mid + ' ' + back + ' =';
-                front = +operate(front, mid, back);
-                mid = key;
-                if (mid !== "=") {
-                    lowDisplay.textContent = front + ' ' + mid;
-                    userInput = [];
-                    dotcount = 0;
+            if (back === 0) {
+                if (mid === "/") {
+                    alert('unable to divide by 0! Please reenter!!!');
                 }
-
-                else {
+                else if (mid === "=") {
+                    upDisplay.textContent = front + " " + mid;
                     lowDisplay.textContent = front;
                     userInput = [front];
-                    let out = front;
-                    repeat = 0;
+                    // console.log(userInput);
                     if (front.toString().includes('.')) {
                         dotcount = 1;
                     }
                     else {
                         dotcount = 0;
                     }
+                    repeat = 0;
                 }
             }
+
+            else {
+                upDisplay.textContent = front + ' ' + mid + ' ' + back + ' =';
+                front = +operate(front, mid, back);
+                console.log(front);
+                mid = key;
+                if (mid !== "=") {
+                    lowDisplay.textContent = '';
+                    lowDisplay.textContent = front + ' ' + mid;
+                    console.log(front, mid);
+                    userInput = [];
+                    dotcount = 0;
+                }
+                else {
+                    lowDisplay.textContent = front;
+                    userInput = [front];
+                    if (front.toString().includes('.')) {
+                        dotcount = 1;
+                    }
+                    else {
+                        dotcount = 0;
+                    }
+                    repeat = 0;
+                } 
+            }    
         }
 
     }
