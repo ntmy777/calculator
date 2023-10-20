@@ -112,7 +112,10 @@ counts.forEach(function (count) {
             if (mid === "=") {
                 lowDisplay.textContent = front;
                 repeat = 0;
-                userInput = [front];
+                userInput = [];
+                front.toString().split('').forEach(function (digit) {
+                    userInput.push(digit);
+                })
                 if (front.toString().includes('.')) {
                     dotcount = 1;
                 }
@@ -138,7 +141,10 @@ counts.forEach(function (count) {
             else if (mid === "=" && back === 0) {
                 upDisplay.textContent = front + " " + mid;
                 lowDisplay.textContent = front;
-                userInput = [front];
+                userInput = [];
+                front.toString().split('').forEach(function (digit) {
+                    userInput.push(digit);
+                })
                 if (front.toString().includes('.')) {
                     dotcount = 1;
                 }
@@ -159,7 +165,10 @@ counts.forEach(function (count) {
                 }
                 else {
                     lowDisplay.textContent = front;
-                    userInput = [front];
+                    userInput = [];
+                    front.toString().split('').forEach(function (digit) {
+                        userInput.push(digit);
+                    })
                     if (front.toString().includes('.')) {
                         dotcount = 1;
                     }
@@ -185,6 +194,7 @@ document.addEventListener('keydown', function (event) {
 
     else if ((key >= '0' && key <= '9') || key === ".") {
         userInput.push(key);
+        console.log(userInput);
         if (key === ".") {
             dotcount++;
             if (dotcount > 1) {
@@ -212,7 +222,10 @@ document.addEventListener('keydown', function (event) {
             if (mid === "=") {
                 lowDisplay.textContent = front;
                 repeat = 0;
-                userInput = [front];
+                userInput = [];
+                front.toString().split('').forEach(function (digit) {
+                    userInput.push(digit);
+                })
                 if (front.toString().includes('.')) {
                     dotcount = 1;
                 }
@@ -238,7 +251,10 @@ document.addEventListener('keydown', function (event) {
             else if (mid === "=" && back === 0) {
                 upDisplay.textContent = front + " " + mid;
                 lowDisplay.textContent = front;
-                userInput = [front];
+                userInput = [];
+                front.toString().split('').forEach(function (digit) {
+                    userInput.push(digit);
+                })
                 if (front.toString().includes('.')) {
                     dotcount = 1;
                 }
@@ -256,13 +272,17 @@ document.addEventListener('keydown', function (event) {
                 if (mid !== "=") {
                     lowDisplay.textContent = '';
                     lowDisplay.textContent = front + ' ' + mid;
-                    console.log(front, mid);
+                    // console.log(front, mid);
                     userInput = [];
                     dotcount = 0;
                 }
                 else {
                     lowDisplay.textContent = front;
-                    userInput = [front];
+                    userInput = [];
+                    front.toString().split('').forEach(function (digit) {
+                        userInput.push(digit);
+                    })
+                    console.log(userInput);
                     if (front.toString().includes('.')) {
                         dotcount = 1;
                     }
