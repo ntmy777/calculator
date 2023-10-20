@@ -11,6 +11,7 @@ html {
     background-color: rgb(89, 88, 88);
     padding: 10px;
     border-radius: 2%;
+    min-width: 335px;
 }
 
 button, .display{
