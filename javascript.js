@@ -212,13 +212,24 @@ document.addEventListener('keydown', function (event) {
             front = +userInput.join('');
             mid = key;
             upDisplay.textContent = front + ' ' + mid;
-            lowDisplay.textContent = '';
             if (mid === "=") {
                 lowDisplay.textContent = front;
+                repeat = 0;
+                userInput = [front];
+                if (front.toString().includes('.')) {
+                    dotcount = 1;
+                }
+                else {
+                    dotcount = 0;
+                }
             }
-            userInput = [];
-            dotcount = 0;
-            repeat = 1;
+            else{
+                lowDisplay.textContent = '';
+                repeat = 1;
+                userInput = [];
+                dotcount = 0;
+            }
+            
         }
 
         else if (repeat === 1) {
