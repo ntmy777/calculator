@@ -108,16 +108,29 @@ counts.forEach(function (count) {
             front = +userInput.join('');
             mid = event.target.textContent;
             upDisplay.textContent = front + ' ' + mid;
-            lowDisplay.textContent = '';
+            
             if (mid === "=") {
                 lowDisplay.textContent = front;
+                repeat = 0;
+                userInput = [front];
+                if (front.toString().includes('.')) {
+                    dotcount = 1;
+                }
+                else {
+                    dotcount = 0;
+                }
             }
-            userInput = [];
-            dotcount = 0;
-            repeat = 1;
+            else{
+                lowDisplay.textContent = '';
+                repeat = 1;
+                userInput = [];
+                dotcount = 0;
+            }
+            
         }
 
         else if (repeat === 1) {
+            // mid = event.target.textContent;
             back = +userInput.join('');
             if (back === 0) {
                 if (mid === "/") {
@@ -134,6 +147,7 @@ counts.forEach(function (count) {
                         dotcount = 0;
                     }
                     repeat = 0;
+                
                 }
             }
 
@@ -208,7 +222,6 @@ document.addEventListener('keydown', function (event) {
         }
 
         else if (repeat === 1) {
-            // mid = key;
             back = +userInput.join('');
             console.log(typeof key, key, typeof back, back);
             if (back === 0) {
@@ -233,7 +246,7 @@ document.addEventListener('keydown', function (event) {
             else {
                 upDisplay.textContent = front + ' ' + mid + ' ' + back + ' =';
                 front = +operate(front, mid, back);
-                console.log(front);
+                // console.log(front);
                 mid = key;
                 if (mid !== "=") {
                     lowDisplay.textContent = '';
